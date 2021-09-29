@@ -4,8 +4,11 @@ import java.util.*;
 public class App {
     public void jdbcConnect(String s) {
         String url, user, password;
-        password = "root";
-        user = "root";
+        System.out.print("Enter password : ");
+        Scanner sc = new Scanner(System.in);
+        password = sc.next();
+        System.out.print("Enter username : ");
+        user = sc.next();
         url = "jdbc:mysql://localhost:3306/aarti";
         String query = s;
         try {
@@ -19,6 +22,7 @@ public class App {
         } catch (Exception e) {
 
         }
+        sc.close();
     }
 
     public static void main(String[] args) throws Exception {

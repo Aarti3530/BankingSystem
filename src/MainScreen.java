@@ -12,7 +12,6 @@ class MainScreen {
         String pass = sc.next();
         sc.close();
         if (name.equals(admin_name) && pass.equals(password)) {
-            // view database
             App a = new App();
             a.jdbcConnect("");
         }
@@ -42,9 +41,10 @@ class MainScreen {
 
     public void login() {
         Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Account number : ");
         String name = sc.nextLine();
-        String id = sc.nextLine();
-        // if database find this data it shows details.
-        // add condition.
+        AllData a = new AllData();
+        // if(a.validate(query, st))
+        sc.close();
     }
 }
