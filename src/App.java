@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.*;
 
 public class App {
-    public void jdbcConnect(String s) {
+    public void jdbcConnect(String s, int t) {
         String url, user, password;
         System.out.print("Enter password : ");
         Scanner sc = new Scanner(System.in);
@@ -15,8 +15,28 @@ public class App {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, password);
             Statement st = con.createStatement();
-            int t = st.executeUpdate(query);
-            System.out.println(t + "kkk");
+            if (t == 1) {
+                st.executeUpdate(query); // for creating account.
+            }
+            // for admin
+            else if (t == 2) {
+                ResultSet res = st.executeQuery(query);
+                res.next();
+                while (res.next()) {
+                    System.out.println(res.getString("FullName") + " " + res.getString("Age") + " "
+                            + res.getString("Address") + " " + res.getString("Amount") + " " + res.getString("Phone"));
+                }
+                System.out.println("1.Delete Account");
+                System.out.println("2.Withdram Money");
+            } else if (t == 3) {
+                ResultSet res = st.executeQuery(query);
+                res.next();
+                while (res.next()) {
+                    System.out.println(res.getString("FullName") + " " + res.getString("Age") + " "
+                            + res.getString("Address") + " " + res.getString("Amount") + " " + res.getString("Phone"));
+                }
+            }
+            // for admin
             st.close();
             con.close();
         } catch (Exception e) {

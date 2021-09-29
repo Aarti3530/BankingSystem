@@ -5,16 +5,8 @@ class MainScreen {
     String password = "admin";
 
     public void admin() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Admin name : ");
-        String name = sc.next();
-        System.out.print("Enter Admin password : ");
-        String pass = sc.next();
-        sc.close();
-        if (name.equals(admin_name) && pass.equals(password)) {
-            App a = new App();
-            a.jdbcConnect("");
-        }
+        App a = new App();
+        a.jdbcConnect("select * from admin;", 3);
     }
 
     public boolean create() {
@@ -32,7 +24,7 @@ class MainScreen {
         App a = new App();
         String s = "'" + name + "','" + age + "','" + add + "','" + initial + "','" + num + "'";
         String query = "insert into admin (FullName, Age, Address, Amount, Phone) values (" + s + ");";
-        a.jdbcConnect(query);
+        a.jdbcConnect(query, 1);
         System.out.println("CONGRATES!!! YOUR ACCOUNT IS CREATED SUCCESSFULLY...");
         // add new data to database. sc.close();
         sc.close();
@@ -41,10 +33,11 @@ class MainScreen {
 
     public void login() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Account number : ");
-        String name = sc.nextLine();
-        AllData a = new AllData();
-        // if(a.validate(query, st))
+        System.out.print("Enter phone number : ");
+        String num = sc.next();
+        String query = "select * from admin where Phone=" + num;
+        App a = new App();
+        a.jdbcConnect(query, 2);
         sc.close();
     }
 }
